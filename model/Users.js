@@ -35,7 +35,7 @@ class Users {
 
   async createUser(req, res) {
     let data = req.body;
-    data.userPwd = await hash(data?.userPwd, 10);
+    data.userPwd = await hashSync(data?.userPwd, 10);
     let user = {
       emailAdd: data.emailAdd,
       userPwd: data.userPwd,
