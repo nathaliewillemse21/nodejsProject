@@ -6,6 +6,9 @@ class Users {
   fetchUsers(req, res) {
     const qry = `
         SELECT userID, firstName, lastName, UserAge, gender,userRole, emailAdd, userPwd, userProfile
+=======
+        SELECT userID, firstName, lastName, UserAge, gender, userRole, userPwd, userProfile
+
         FROM Users`;
 
     db.query(qry, (err, results) => {
@@ -18,11 +21,12 @@ class Users {
   }
   fetchUser(req, res) {
     const qry = `
+
         SELECT userID, firstName, lastName, UserAge, gender,userRole, emailAdd, userPwd, userProfile
         FROM Users
         WHERE userID = ${req.params.id} `;
       
-      
+
     db.query(qry, (err, result) => {
       if (err) throw err;
       res.json({
@@ -64,7 +68,8 @@ class Users {
   async updateUser(req, res) {
     const data = req.body;
     if (data?.userPwd) {
-      data.userPwd = await hash(data.userPwd, 8);
+      data.userPwd = await hash(data.userPwd, 10);
+
     }
 
     const qry = `
