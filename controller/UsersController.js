@@ -37,11 +37,7 @@ userRouter.post('/register', bodyParser.json(), (req, res) => {
   }
 });
 
-userRouter.delete(
-  '/deleteUser/:id',
-  verifyToken,
-  bodyParser.json(),
-  (req, res) => {
+userRouter.delete('/deleteUser/:id', verifyToken, bodyParser.json(), (req, res) => {
     try {
       users.deleteUser(req, res);
     } catch (e) {
