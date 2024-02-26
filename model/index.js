@@ -1,6 +1,6 @@
 import { Users } from './Users.js';
 
-import { Products } from './Product.js'
+import { Products } from './Products.js'
 
 
 let users = new Users();
