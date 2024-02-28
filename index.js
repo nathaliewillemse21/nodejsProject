@@ -1,6 +1,6 @@
 console.log('Annyeonghaseyo');
 import { userRouter } from './controller/Userscontroller.js';
-import { productRouter } from './controller/Productcontroller.js';
+import { productsRouter } from './controller/Productcontroller.js';
 import cookieParser from 'cookie-parser';
 import { errorHandling } from './middleware/ErrorHandling.js';
 import path from 'path';
@@ -30,11 +30,11 @@ app.use(
   cookieParser(),
   cors()
 );
-app.get('^/$|/nodejsProject', (req, res) => {
+app.get('^/$|/nodejsproject', (req, res) => {
   res.status(200).sendFile(path.join(__dirname, './static/index.html'));
 });
-app.use('/user', userRouter);
-app.use('/product', productRouter);
+app.use('/users', userRouter);
+app.use('/products', productsRouter);
 app.use(errorHandling);
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);

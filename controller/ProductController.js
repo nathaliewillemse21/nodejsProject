@@ -1,40 +1,59 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import { products } from '../model/index.js';
-
-const productRouter = express.Router();
-
-productRouter.get('/', (req, res) => {
+const productsRouter = express.Router();
+//fetch all products
+productsRouter.get('/', (req, res) => {
   try {
     products.fetchProducts(req, res);
   } catch (e) {
-    res.status(500).json({
-      status: 500,
+    res.json({
+      status: res.statusCode,
       msg: 'Failed to retrieve products',
     });
   }
 });
-
-productRouter.get('/:id', (req, res) => {
+productsRouter.get('/:id', (req, res) => {
   try {
+    0;
     products.fetchProduct(req, res);
   } catch (e) {
-    res.status(500).json({
-      status: 500,
-      msg: 'Failed to retrieve the product',
+    res.json({
+      status: res.statusCode,
+      msg: 'Failed to retrieve a product',
     });
   }
 });
-
-productRouter.post('/addProduct', bodyParser.json(), (req, res) => {
+productsRouter.post('/addProduct', bodyParser.json(), (req, res) => {
   try {
     products.addProduct(req, res);
   } catch (e) {
-    res.status(500).json({
-      status: 500,
+    res.json({
+      status: res.statusCode,
       msg: 'Failed to add new product',
     });
   }
 });
 
-export { productRouter };
+productsRouter.delete('/delete/:id', bodyParser.json(), (req, res) => {
+    try {
+        products.deleteProduct(req, res);
+    } catch (e) {
+        res.json({
+            status: res.statusCode,
+            msg: 'Failed to delete a product.',
+        })
+    };
+})
+productsRouter.patch('/update/:id', bodyParser.json(), (req, res) => {
+  try {
+    products.updateProduct(req, res);
+  } catch (e) {
+    res.json({
+      status: res.statusCode,
+      msg: 'Failed to update a product',
+    });
+  }
+});
+
+export { productsRouter };

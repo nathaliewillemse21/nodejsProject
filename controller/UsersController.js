@@ -1,9 +1,9 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import { users } from '../model/index.js';
-import { verifyToken } from '../middleware/AuthenticateUser.js';
+import { verifyAToken } from '../middleware/AuthenticateUser.js';
 const userRouter = express.Router();
-
+// fetch users
 userRouter.get('/', (req, res) => {
   try {
     users.fetchUsers(req, res);
@@ -14,10 +14,11 @@ userRouter.get('/', (req, res) => {
     });
   }
 });
+//Fetch user
 
 userRouter.get('/:id', (req, res) => {
   try {
-    users.fetchUsers(req, res);
+    users.fetchUser(req, res);
   } catch (e) {
     res.json({
       status: res.statusCode,
@@ -25,7 +26,7 @@ userRouter.get('/:id', (req, res) => {
     });
   }
 });
-
+//Add a user
 userRouter.post('/register', bodyParser.json(), (req, res) => {
   try {
     users.createUser(req, res);
@@ -37,19 +38,20 @@ userRouter.post('/register', bodyParser.json(), (req, res) => {
   }
 });
 
-userRouter.delete('/deleteUser/:id', verifyToken, bodyParser.json(), (req, res) => {
-    try {
-      users.deleteUser(req, res);
-    } catch (e) {
-      res.json({
-        status: res.statusCode,
-        msg: 'Failed to delete a user.',
-      });
-    }
+// Delete a user
+userRouter.delete('/delete/:id', bodyParser.json(), (req, res) => {
+  try {
+    users.deleteUser(req, res);
+  } catch (e) {
+    res.json({
+      status: res.statusCode,
+      msg: 'Failed to delete a user.',
+    });
   }
-);
+});
+// Update a user
 
-userRouter.patch('/update/:id', verifyToken, bodyParser.json(), (req, res) => {
+userRouter.patch('/update/:id', bodyParser.json(), (req, res) => {
   try {
     users.updateUser(req, res);
   } catch (e) {
@@ -59,6 +61,8 @@ userRouter.patch('/update/:id', verifyToken, bodyParser.json(), (req, res) => {
     });
   }
 });
+
+// Log user in
 
 userRouter.post('/login', bodyParser.json(), (req, res) => {
   try {
