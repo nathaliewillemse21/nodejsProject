@@ -1,6 +1,6 @@
 console.log('Annyeonghaseyo');
-import { userRouter } from './controller/Userscontroller.js';
-import { productsRouter } from './controller/Productcontroller.js';
+import { userRouter } from '/controller/UsersController.js';
+import { productsRouter } from './controller/ProductController.js';
 import cookieParser from 'cookie-parser';
 import { errorHandling } from './middleware/ErrorHandling.js';
 import path from 'path';
