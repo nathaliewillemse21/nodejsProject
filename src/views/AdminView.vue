@@ -5,43 +5,45 @@
           <tr>
             <th>ID</th>
             <th>Name</th>
-            <th>LastName</th>
-            <th>Age</th>
-            <th>Gender</th>
-            <th>Role</th>
-            <th>UserProfile</th>
+            <th>Image</th>
+            <th>Amount</th>
+            <th>Action</th>
+            <p>Add</p>
+            <p>Delete</p>
           </tr>
         </thead>
         <tbody>
-          <tr v-for="user in users" :key="user.id">
-            <td>{{ user.userID }}</td>
-            <td>{{ user.firstName }}</td>
-            <td>{{ user.lastName }}</td>
-            <td>{{ user.UserAge }}</td>
-            <td>{{ user.gender }}</td>
-            <td>{{ user.userRole }}</td>
-            <td>{{ user.userProfile }}</td>
+          <tr v-for="admin in admins" :key="admin.id">
+            <td>{{ admin.id }}</td>
+            <td>{{ admin.name }}</td>
+            <td>{{ admin.image }}</td>
+            <td>{{ admin.amount }}</td>
+            <td>{{ admin.action }}</td>
           </tr>
         </tbody>
       </table>
     </div>
   </template>
-  
   <script>
   export default {
     computed: {
       users() {
         return this.$store.state.users;
       },
+      products() {
+        return this.$store.state.products;
+      },
     },
     mounted() {
-      this.$store.dispatch('fetchUsers');
+      this.$store.dispatch('fetchProducts');
     },
   };
   </script>
   
-  <style scoped>
   
+  
+  
+  <style scoped>
   table {
     width: 100%;
     border-collapse: collapse;

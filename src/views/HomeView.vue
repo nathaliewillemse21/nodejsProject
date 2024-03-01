@@ -2,7 +2,10 @@
   <div class="home display-3">
     <div id="body">
       <h1 class="container display-1" id="text"></h1>
-      <button class="shop-now-button">Shop Now</button>
+      <a href="#products">
+                        <button class="btn btn-light" type="button">Shop now..</button>
+                    </a>
+
     </div>
   </div>
 </template>

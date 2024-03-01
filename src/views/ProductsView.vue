@@ -1,5 +1,18 @@
 <template>
-    <div>
+  <div class="container">
+    <div class="row">
+      <div class="card p-0" v-for="Product in products" :key="Product.id"  style="width: 20rem;">
+          <img :src="Product.prodUrl" class="card-img-top" >
+          <div class="card-body">
+            <h5 class="card-title">{{ Product.prodID }}</h5>
+            <p class="card-title">{{ Product.prodName }}</p>
+            <p class="card-text">{{ Product.amount }}</p>
+            <p class="card-text">{{ Product.Category }}</p>
+          </div>
+        </div>
+      </div>
+  </div>
+<div>
         <div>
             <h2 class="products">Products</h2>
       <label for="search">Search:</label>
@@ -19,17 +32,21 @@
     </ul>
     <router-link to="/products/new">Add Product</router-link>
   </div>
-      <ul>
-        <li v-for="product in products" :key="product.id">
-          {{ product.name }}
-          <button @click="editProduct(product.id)">Edit</button>
-          <button @click="deleteProduct(product.id)">Delete</button>
-        </li>
-      </ul>
   </template>
   <script>
+  import CardView from '@/components/CardView.vue'
   export default {
-    props: ['products'],
+    name: 'ProductsView',
+    CardView,
+    computed:{
+        products(){
+            return this.$store.state.products
+        },
+        mounted(){
+            return this.$store.dispatch('fetchProducts')
+        }
+    },
+    props: ['product'],
     methods: {
       editProduct(id) {
         this.$router.push(`/products/${id}/edit`);
