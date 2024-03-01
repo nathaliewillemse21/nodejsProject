@@ -1,11 +1,20 @@
 <template>
-    <div class="loader-container">
-     <div class="loader"></div>
-     <div class="loader-text">Loading...</div>
-   </div>
-     </template>
-     <script>
-     export default {
-        name:'SpinnersComp',
-     };
-     </script>
+  <div>
+    <BounceLoader :loading="isLoading" />
+  </div>
+</template>
+
+<script>
+import { BounceLoader } from 'vue-spinner';
+
+export default {
+  components: {
+    BounceLoader,
+  },
+  data() {
+    return {
+      isLoading: false,
+    };
+  },
+};
+</script>

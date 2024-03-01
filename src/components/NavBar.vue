@@ -1,9 +1,9 @@
 <template>
-    <nav class="container-fluid navbar navbar-expand-lg custom-navbar " id="navbar">
+    <nav class="navbar navbar-expand-lg" id="navbar">
    <div class="container-fluid">
     <!-- logo -->
          <RouterLink to="/">
-     <img class="img-fluid" loading="lazy" src="https://i.postimg.cc/cLVf01Vx/N.png" alt="logo" id="logo">
+     <img class="img-fluid" loading="lazy" src="https://i.postimg.cc/cLVf01Vx/N.png" alt="logo">
     </RouterLink>
      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
        <span class="navbar-toggler-icon"></span>
@@ -56,7 +56,7 @@
    padding: 10px 0; 
  }
 
- #logo {
+ img[alt='logo'] {
    max-height: 50px; 
  }
 

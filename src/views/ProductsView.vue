@@ -1,19 +1,5 @@
 <template>
-  <div class="container">
-    <div class="row">
-      <div class="card p-0" v-for="Product in products" :key="Product.id"  style="width: 20rem;">
-          <img :src="Product.prodUrl" class="card-img-top" >
-          <div class="card-body">
-            <h5 class="card-title">{{ Product.prodID }}</h5>
-            <p class="card-title">{{ Product.prodName }}</p>
-            <p class="card-text">{{ Product.amount }}</p>
-            <p class="card-text">{{ Product.Category }}</p>
-          </div>
-        </div>
-      </div>
-  </div>
-<div>
-        <div>
+  <div>
             <h2 class="products">Products</h2>
       <label for="search">Search:</label>
       <input v-model="search" @input="filterProducts" />
@@ -23,6 +9,23 @@
         <option value="price">Price</option>
       </select>
     </div>
+  <div class="container">
+    <div class="row">
+      <div class="card p-0" v-for="product in products" :key="product.prodID"  style="width: 20rem;">
+          <img :src="product.prodUrl" class="card-img-top">
+          <div class="card-body">
+            <h5 class="card-title">{{ product.prodID }}</h5>
+            <p class="card-title">{{ product.prodName }}</p>
+            <p class="card-text">{{ product.amount }}</p>
+            <p class="card-text">{{ product.Category }}</p>
+          </div>
+          <div class="button">
+            <button @click="viewMore(product.prodID)" class="buttn">ViewMore</button>
+          </div>
+        </div>
+      </div>
+  </div>
+<div>
     <ul>
       <li v-for="product in filteredProducts" :key="product.id">
         {{ product.name }} - {{ product.price }}
@@ -30,7 +33,6 @@
         <button @click="deleteProduct(product.id)">Delete</button>
       </li>
     </ul>
-    <router-link to="/products/new">Add Product</router-link>
   </div>
   </template>
   <script>
@@ -56,6 +58,52 @@
       },
     },
   };
+  
   </script>
   <style>
+  .container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin: 20px;
+}
+
+.card {
+    margin: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+}
+
+.card:hover {
+    transform: scale(1.05);
+}
+
+.card-img-top {
+    max-height: 200px;
+    object-fit: cover;
+}
+
+.card-body {
+    padding: 15px;
+}
+
+.card-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.card-text {
+    font-size: 1rem;
+    margin-bottom: 5px;
+}
+.search-input {
+    margin-right: 10px;
+    padding: 5px;
+  }
+
+  .sort-select {
+    padding: 5px;
+  }
+
 </style>
