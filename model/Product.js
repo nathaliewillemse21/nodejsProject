@@ -2,7 +2,7 @@ import { connection as db } from '../config/index.js';
 class Products {
   fetchProducts(req, res) {
     const qry = `
-        SELECT prodID, prodName, quantity, amount, Category, prodUrl
+        SELECT prodID, prodName, quantity, amount, category, prodUrl
         FROM Products;
         `;
     db.query(qry, (err, results) => {
@@ -15,7 +15,7 @@ class Products {
   }
   fetchProduct(req, res) {
     const qry = `
-        SELECT prodID, prodName, quantity, amount, Category, prodUrl
+        SELECT prodID, prodName, quantity, amount, category, prodUrl
         FROM Products
         WHERE prodID = ${req.params.id};
         `;
@@ -29,23 +29,23 @@ class Products {
   }
   addProduct(req, res) {
     const qry = `
-    INSERT INTO Products
-    SET ?`;
-
+        INSERT INTO Products
+        SET ?;`;
     db.query(qry, [req.body], (err) => {
-      if (err) {
-        console.error(err);
-        return res.status(500).json({
-          error: 'Internal Server Error',
-        });
-      }
-      res.status(201).json({
+      if (err) throw err;
+      res.json({
         status: res.statusCode,
-        msg: 'New product added',
+        msg: 'new product Added',
+      });
+    });
+    db.query(qry, (err) => {
+      if (err) throw err;
+      res.json({
+        status: res.statusCode,
+        msg: 'new Product added',
       });
     });
   }
-
   deleteProduct(req, res) {
     const prodID = req.params.id;
     if (!prodID) {
